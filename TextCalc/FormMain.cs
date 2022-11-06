@@ -100,7 +100,7 @@ namespace TextCalc
                 if (past)
                 {
                     past = false;
-                    textBox3.Text = textBox3.Text.Replace(",", ".").Replace("..", ".") + (textBox2.Lines[textBox2.Lines.Length - 1].Length > 0 ? Environment.NewLine : "");
+                    textBox3.Text = textBox3.Text.Replace(",", ".").Replace("..", ".") + (textBox3.Lines[textBox3.Lines.Length - 1].Length > 0 ? Environment.NewLine : "");
                 }
                 else
                 {
