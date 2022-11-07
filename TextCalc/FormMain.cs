@@ -15,6 +15,17 @@ namespace TextCalc
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TopMost = !TopMost;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox2.Clear();
+            textBox3.Clear();
+        }
+
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/')
@@ -78,38 +89,8 @@ namespace TextCalc
         private void calcFunc()
         {
             textBox4.Clear();
-            if (textBox2.Text.Length > 0)
-            {
-                textBox2.TextChanged -= textBoxs_TextChanged;
-                if (past)
-                {
-                    past = false;
-                    textBox2.Text = textBox2.Text.Replace(",", ".").Replace("..", ".") + (textBox2.Lines[textBox2.Lines.Length - 1].Length > 0 ? Environment.NewLine : "");
-                }
-                else
-                {
-                    textBox2.Text = textBox2.Text.Replace(",", ".").Replace("..", ".");
-                }
-                textBox2.TextChanged += textBoxs_TextChanged;
-                textBox2.SelectionStart = textBox2.Text.Length;
-                textBox2.ScrollToCaret();
-            }
-            if (textBox3.Text.Length > 0)
-            {
-                textBox3.TextChanged -= textBoxs_TextChanged;
-                if (past)
-                {
-                    past = false;
-                    textBox3.Text = textBox3.Text.Replace(",", ".").Replace("..", ".") + (textBox3.Lines[textBox3.Lines.Length - 1].Length > 0 ? Environment.NewLine : "");
-                }
-                else
-                {
-                    textBox3.Text = textBox3.Text.Replace(",", ".").Replace("..", ".");
-                }
-                textBox3.TextChanged += textBoxs_TextChanged;
-                textBox3.SelectionStart = textBox3.Text.Length;
-                textBox3.ScrollToCaret();
-            }
+            formatTextBox(textBox2);
+            formatTextBox(textBox3);
             if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0)
             {
                 List<string> tb1 = new List<string>();
@@ -128,18 +109,43 @@ namespace TextCalc
                             Double.TryParse(tb1[i], NumberStyles.Number, CultureInfo.InvariantCulture, out value1);
                             double value2 = -1;
                             Double.TryParse(tb2[i], NumberStyles.Number, CultureInfo.InvariantCulture, out value2);
-                            textBox4.Text = textBox4.Text + (operation == 0 ? (value1 + value2) : (operation == 1 ? (value1 - value2) : (operation == 2 ? (value1 * value2) : (value1 / value2)))).ToString().Replace(",", ".") + Environment.NewLine;
+                            string line = (operation == 0 ? (value1 + value2) : (operation == 1 ? (value1 - value2) : (operation == 2 ? (value1 * value2) : (value1 / value2)))).ToString().Replace(",", ".");
+                            if (line.Contains(".") && line.Length > line.IndexOf(".") + 7)
+                            {
+                                line = line.Remove(line.IndexOf(".") + 7);
+                            }
+                            textBox4.Text = textBox4.Text + line + Environment.NewLine;
                         }
                         else
                         {
-                            int value1 = -1;
-                            Int32.TryParse(tb1[i], out value1);
-                            int value2 = -1;
-                            Int32.TryParse(tb2[i], out value2);
+                            long value1 = -1;
+                            Int64.TryParse(tb1[i], out value1);
+                            long value2 = -1;
+                            Int64.TryParse(tb2[i], out value2);
                             textBox4.Text = textBox4.Text + (operation == 0 ? (value1 + value2) : (operation == 1 ? (value1 - value2) : (value1 * value2))).ToString() + Environment.NewLine;
                         }
                     }
                 }
+            }
+        }
+
+        private void formatTextBox(TextBox textbox)
+        {
+            if (textbox.Text.Length > 0)
+            {
+                textbox.TextChanged -= textBoxs_TextChanged;
+                if (past && textbox.Focused)
+                {
+                    past = false;
+                    textbox.Text = textbox.Text.Replace(",", ".").Replace("..", ".") + (textbox.Lines[textbox.Lines.Length - 1].Length > 0 ? Environment.NewLine : "");
+                }
+                else
+                {
+                    textbox.Text = textbox.Text.Replace(",", ".").Replace("..", ".");
+                }
+                textbox.TextChanged += textBoxs_TextChanged;
+                textbox.SelectionStart = textbox.Text.Length;
+                textbox.ScrollToCaret();
             }
         }
     }
