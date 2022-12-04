@@ -101,7 +101,7 @@ namespace TextCalc
                 int count2 = tb2.Count;
                 for (int i = 0; i < count1 && i < count2; i++)
                 {
-                    if (!string.IsNullOrEmpty(tb1[i]) && !string.IsNullOrEmpty(tb2[i]))
+                    if (!String.IsNullOrEmpty(tb1[i]) && !String.IsNullOrEmpty(tb2[i]))
                     {
                         if (tb1[i].Contains(".") || tb2[i].Contains(".") || operation == 3)
                         {
