@@ -1,4 +1,6 @@
 # TextCalc
-Калькулятор между двумя текстовыми окнами. Можно вставлять и писать построчно любые числа, в т.ч. не целые, вводить нужное действие с ними в среднее окно и получить результат.
+Калькулятор между двумя текстовыми окнами. Можно вставлять и писать построчно любые числа, в т.ч. не целые, вводить нужное действие с ними в среднее окно и получить результат.\
+Calculator between two text boxes. You can insert and write any numbers line by line, incl. not integers, enter the desired action with them in the middle window and get the result.
 
-![image](https://user-images.githubusercontent.com/21084600/200193595-4dafd95a-165c-4226-a8ea-4ed986a6db7e.png)
+Скриншот см. в разделе Релизы.\
+Screenshot in Releases section.
