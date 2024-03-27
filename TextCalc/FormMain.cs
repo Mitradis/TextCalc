@@ -15,18 +15,18 @@ namespace TextCalc
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void button1_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void button2_Click(object sender, EventArgs e)
         {
             textBox2.Clear();
             textBox3.Clear();
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/')
             {
@@ -51,7 +51,7 @@ namespace TextCalc
             calcFunc();
         }
 
-        private void textBoxs_KeyDown(object sender, KeyEventArgs e)
+        void textBoxs_KeyDown(object sender, KeyEventArgs e)
         {
             if (sender != null && e.Control)
             {
@@ -66,7 +66,7 @@ namespace TextCalc
             }
         }
 
-        private void textBoxs_KeyPress(object sender, KeyPressEventArgs e)
+        void textBoxs_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -81,12 +81,12 @@ namespace TextCalc
             }
         }
 
-        private void textBoxs_TextChanged(object sender, EventArgs e)
+        void textBoxs_TextChanged(object sender, EventArgs e)
         {
             calcFunc();
         }
 
-        private void calcFunc()
+        void calcFunc()
         {
             textBox4.Clear();
             formatTextBox(textBox2);
@@ -122,14 +122,14 @@ namespace TextCalc
                             Int64.TryParse(tb1[i], out value1);
                             long value2 = -1;
                             Int64.TryParse(tb2[i], out value2);
-                            textBox4.Text = textBox4.Text + (operation == 0 ? (value1 + value2) : (operation == 1 ? (value1 - value2) : (value1 * value2))).ToString() + Environment.NewLine;
+                            textBox4.Text = textBox4.Text + (operation == 0 ? (value1 + value2) : (operation == 1 ? (value1 - value2) : (value1 * value2))) + Environment.NewLine;
                         }
                     }
                 }
             }
         }
 
-        private void formatTextBox(TextBox textbox)
+        void formatTextBox(TextBox textbox)
         {
             if (textbox.Text.Length > 0)
             {
